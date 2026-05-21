@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GİB Teknik Servis Sistemine erişim durumunu kontrol edin. Sistem müsaitlik paneli.">
+    <title>GİB Sistem Durum Paneli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="6" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 16h12M16 10v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>GİB Sistem Durum Paneli</h1>
+                    <p class="subtitle">Teknik Servis Erişim Yönetimi</p>
+                </div>
+            </div>
+            <div class="timestamp" id="timestamp"></div>
+        </header>
+
+        <main class="main-content">
+            <!-- Status Card -->
+            <div class="status-card" id="statusCard">
+                <div class="status-indicator-wrapper">
+                    <div class="status-pulse" id="statusPulse"></div>
+                    <div class="status-dot" id="statusDot"></div>
+                </div>
+                <div class="status-info">
+                    <span class="status-label">Sistem Durumu</span>
+                    <span class="status-text" id="statusText">MÜSAİT</span>
+                </div>
+            </div>
+
+            <!-- Login Panel (visible when system is available) -->
+            <div class="panel login-panel" id="loginPanel">
+                <div class="panel-header">
+                    <div class="panel-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10 17 15 12 10 7"/>
+                            <line x1="15" y1="12" x2="3" y2="12"/>
+                        </svg>
+                    </div>
+                    <h2>Sisteme Giriş</h2>
+                </div>
+                <p class="panel-description">Sisteme erişmek için lütfen adınızı girin.</p>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="nameInput" 
+                            placeholder="Ad Soyad giriniz..." 
+                            autocomplete="off"
+                            maxlength="50"
+                        >
+                    </div>
+                    <button class="btn btn-primary" id="loginBtn" disabled>
+                        <span>Giriş Yap</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Session Panel (visible when system is busy) -->
+            <div class="panel session-panel hidden" id="sessionPanel">
+                <div class="panel-header">
+                    <div class="panel-icon active-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h2>Aktif Oturum</h2>
+                </div>
+                <div class="session-details">
+                    <div class="user-avatar" id="userAvatar"></div>
+                    <div class="user-info">
+                        <span class="user-label">Sistemde Aktif Kullanıcı</span>
+                        <span class="user-name" id="userName"></span>
+                    </div>
+                </div>
+                <div class="session-meta">
+                    <div class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <span>Giriş Saati: <strong id="loginTime"></strong></span>
+                    </div>
+                    <div class="meta-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        <span>Süre: <strong id="sessionDuration">00:00</strong></span>
+                    </div>
+                </div>
+                <button class="btn btn-danger" id="logoutBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    <span>Çıkış Yap</span>
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>GİB Teknik Servis &middot; Sistem Durum Paneli &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

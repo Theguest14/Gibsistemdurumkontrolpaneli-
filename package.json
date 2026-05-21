@@ -1,0 +1,14 @@
+{
+  "name": "gib-sistem-durum-paneli",
+  "version": "1.0.0",
+  "description": "GİB Teknik Servis Sistem Durum Paneli - Gerçek zamanlı erişim yönetimi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "socket.io": "^4.7.5"
+  }
+}
